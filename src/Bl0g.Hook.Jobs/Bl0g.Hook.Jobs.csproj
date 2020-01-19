@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bl0g.Hook.Core\Bl0g.Hook.Core.csproj" />
+    <ProjectReference Include="..\Bl0g.Hook.Jobs.Interfaces\Bl0g.Hook.Jobs.Interfaces.csproj" />
+    <ProjectReference Include="..\Bl0g.Hook.Workers.Core.Shared\Bl0g.Hook.Workers.Core.Shared.csproj" />
+    <ProjectReference Include="..\Bl0g.Hook.Workers.Interfaces\Bl0g.Hook.Workers.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

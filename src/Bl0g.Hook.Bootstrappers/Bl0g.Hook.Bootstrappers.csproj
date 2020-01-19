@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bl0g.Hook.Bootstrappers.Interfaces\Bl0g.Hook.Bootstrappers.Interfaces.csproj" />
+    <ProjectReference Include="..\Bl0g.Hook.Communication.Clients.Interfaces\Bl0g.Hook.Communication.Clients.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

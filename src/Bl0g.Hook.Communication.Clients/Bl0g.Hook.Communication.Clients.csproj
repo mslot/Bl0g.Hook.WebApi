@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Storage.Queue" Version="11.1.2" />
+    <PackageReference Include="System.Text.Json" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bl0g.Hook.Communication.Clients.Interfaces\Bl0g.Hook.Communication.Clients.Interfaces.csproj" />
+    <ProjectReference Include="..\Bl0g.Hook.Communication.Core.Shared\Bl0g.Hook.Communication.Core.Shared.csproj" />
+    <ProjectReference Include="..\Bl0g.Hook.Communication\Bl0g.Hook.Communication.csproj" />
+    <ProjectReference Include="..\Bl0g.Hook.Core\Bl0g.Hook.Core.csproj" />
+  </ItemGroup>
+
+</Project>

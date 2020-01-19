@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bl0g.Hook.Mappers.Interfaces\Bl0g.Hook.Mappers.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
