@@ -68,9 +68,7 @@ namespace Bl0g.Hook.WebApi
             services.AddSingleton<IQueueClientCreator, AzureStorageQueueClientCreator>();
             services.AddSingleton<IDistributedQueueClient, AzureStorageDistributedClient>();
 
-            services.AddScoped<IFilesClient, GithubClient>();
             services.AddScoped<IProcessJob<CommitInfo>, ProcessCommitInfoJob>();
-            services.AddScoped<IGetFilesWorker<FilesGetRequest>, GetFilesWorker>();
             services.AddScoped<IEnqueueFilesWorker<CommitQueueMessage>, CommitQueueWorker>();
 
             services.AddControllers();

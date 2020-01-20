@@ -10,40 +10,50 @@ namespace Bl0g.Hook.Jobs
 {
     public class ProcessCommitInfoJob : IProcessJob<CommitInfo>
     {
-        private readonly IGetFilesWorker<FilesGetRequest> _getFilesWorker;
         private readonly IEnqueueFilesWorker<CommitQueueMessage> _enqueueFilesWorker;
 
         public ProcessCommitInfoJob(
-            IGetFilesWorker<FilesGetRequest> getFilesWorker,
             IEnqueueFilesWorker<CommitQueueMessage> enqueueFilesWorker)
         {
-            _getFilesWorker = getFilesWorker;
             _enqueueFilesWorker = enqueueFilesWorker;
         }
 
         public async Task StartAsync(CommitInfo argument)
         {
             FilesGetRequest request = PrepareRequest(argument);
-            IEnumerable<FileContent> files = await _getFilesWorker.GetFilesAsync(request);
-            await Enqueue(files);
+            await Enqueue(request, argument);
         }
 
         private FilesGetRequest PrepareRequest(CommitInfo argument)
         {
-            return null;
-        }
+            string ownerName = argument.Repository.Owner.Name;
+            string repositoryName = argument.Repository.Name;
+            List<FileMetadata> metadata = new List<FileMetadata>();
 
-        private async Task Enqueue(IEnumerable<FileContent> files)
-        {
-            var commitTasks = new LinkedList<Task>();
-            foreach (var file in files)
+            List<string> names = new List<string>();
+            foreach (var commit in argument.Commits)
             {
-                var queueMessage = new CommitQueueMessage();
-                var enqueueTask = _enqueueFilesWorker.AddFileAsync(queueMessage);
-                commitTasks.AddLast(enqueueTask);
+                names.AddRange(commit.Added);
+                names.AddRange(commit.Removed);
+                names.AddRange(commit.Modified);
             }
 
-            await Task.WhenAll(commitTasks);
+            foreach (var name in names)
+            {
+                FileMetadata fileMetadata = new FileMetadata(name);
+                metadata.Add(fileMetadata);
+            }
+
+            FilesGetRequest request = new FilesGetRequest(ownerName, repositoryName, metadata);
+
+
+            return request;
+        }
+
+        private async Task Enqueue(FilesGetRequest request, CommitInfo commitInfo)
+        {
+            var queueMessage = new CommitQueueMessage { Body=request };
+            await _enqueueFilesWorker.AddFileAsync(queueMessage);
         }
     }
 }

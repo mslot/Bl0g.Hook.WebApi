@@ -27,7 +27,7 @@ namespace Bl0g.Hook.Communication.Clients.Github
              * TODO: This could be broken up, so all retrievals was done at once
              *       and awaited afterwards
              */
-            foreach (var fileMetadata in request.FileMetadata)
+            foreach (var fileMetadata in request.FilesMetadata)
             {
                 var content = await client.Repository.Content.GetAllContents(
                     request.OwnerName,
